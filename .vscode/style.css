@@ -1,175 +1,182 @@
-/*display block é na margin; display flex é no align itens e no justify content;*/
 
 * {
-  margin: 0; /* nao vai ter mais a margem padrao do navegador */
-  padding: 0; /* nao vai ter mais o padding padrao do navegador */
-  box-sizing: border-box; /* medida do tamanho da caixa pra ser medida atraves da borda */
+  margin: 0;
+  padding: 0; 
+  box-sizing: border-box; 
 }
 
-/*usado para definir todo o conteudo de uma pagina, nome pode ser outro*/
-html {
-  --text-color: white; /*cor do texto quando estiver com essa url*/
-  --bg-url: url(./assets/bg-mobile.jpg); /*url modo escuro, botei aqui para definir que quando estiver essa url, todo texto ser branco*/
-  --stroke-color: rgba(255, 255, 255, 0.5); /* cor da borda do botao*/
-  --surface-color: rgba(255, 255, 255, 0.05); /* cor do fundo do botao */
-  --surface-color-hover: rgba(
-    0,
-    0,
-    0,
-    0.02
-  ); /*cor do botao quando passa o mouse por cima*/
-  --highlight-color: rgba(255, 255, 255, 0.2); /*cor do fundo dos botoes */
-  --switch-svg-url: url(assets/moon-stars.svg); /* imagem do botao de switch*/
+
+:root {
+  --text-color: white; 
+  --bg-url: url(./assets/bg-mobile.jpg); 
+  --stroke-color: rgba(255, 255, 255, 0.5); 
+  --surface-color: rgba(255, 255, 255, 0.05); 
+  --surface-color-hover: rgba(0, 0, 0, 0.02); 
+  --highlight-color: rgba(255, 255, 255, 0.2); 
+  --switch-svg-url: url(assets/moon-stars.svg); 
 }
 
-/*usado para definir todo o conteudo de uma pagina em outra cor, eu escolho o nome la no html*/
 .light {
-  --text-color: black; /*cor do texto quando estiver com essa url*/
-  --bg-url: url(./assets/bg-mobile-light.jpg); /*url modo claro, botei aqui para definir que quando estiver essa url, todo texto ser preto*/
-  --stroke-color: rgba(0, 0, 0, 0.5); /* cor da borda do botao*/
-  --surface-color: rgba(0, 0, 0, 0.05); /* cor do fundo do botao */
-  --surface-color-hover: rgba(
-    0,
-    0,
-    0,
-    0.02
-  ); /*cor do botao quando passa o mouse por cima*/
-  --highlight-color: rgba(0, 0, 0, 0.1); /*cor do fundo dos botoes */
-  --switch-svg-url: url(assets/sun.svg); /* imagem do botao de switch*/
+  --text-color: black; 
+  --bg-url: url(./assets/bg-mobile-light.jpg);
+  --stroke-color: rgba(0, 0, 0, 0.5); 
+  --surface-color: rgba(0, 0, 0, 0.05); 
+  --surface-color-hover: rgba( 0, 0, 0, 0.02); 
+  --highlight-color: rgba(0, 0, 0, 0.1); 
+  --switch-svg-url: url(assets/sun.svg); 
 }
 
 body {
-  /*
-  background-image: url(./assets/bg-mobile.jpg);     botei no :root
-  background-repeat: no-repeat;
-  background-position: top center;
-  background-size: cover;
-  */
-
-  /*para agrupar todos em um so
-  background: color image repeat position/size */
   background: var(--bg-url) no-repeat top center/cover;
+  height: 100vh;
 }
 
 body * {
-  font-family: "Inter", sans-serif; /* fonte usada nas letras */
-  color: var(--text-color); /* cor das letras */
+  font-family: "Inter", sans-serif; 
+  color: var(--text-color); 
 }
 
 #container {
-  width: 360px; /* largura */
-  margin: auto; /* alinhar a caixa no meio da tela, porem no CSS ele nao funciona com a parte de cima da caixa*/
-  padding-top: 56px; /* espaço entre a parte de cima da tela e a caixa (complemento do codigo acima) */
-  padding: 0 24px; /* preenchimento 0 emcima e de 24 nas laterais que deixou os botoes menores */
+  width: 100%; 
+  max-width: 588px;
+  margin: auto; 
+  padding-top: 56px; 
+  padding: 0 24px; 
 }
 
 #profile {
-  text-align: center; /* alinhar a imagem no meio, nao posso usar o margin:auto no img abaixo pq ele nao funciona em display "inline" e o img é inline, entao se cria um "pai" e usa esse comando que funciona nos elementos "inline"*/
-  padding: 24px; /* preenchimento interno da caixa */
+  text-align: center;
+  padding: 24px; 
 }
 
 #profile img {
-  width: 112px; /*largura da imagem */
+  width: 112px; 
 }
 
 #profile p {
-  font-weight: 500; /*negrito */
-  line-height: 24px; /* altura da linha */
-  margin-top: 8px; /* espaço entre o nome e a imagem */
+  font-weight: 500;
+  line-height: 24px; 
+  margin-top: 8px; 
 }
 
 #switch {
-  position: relative; /*o botao do switch so vai se movimentar dentro da caixa(isso deixa a tag absolute que esta abaixo mais restrito para apenas dentro da caixa*/
-  width: 64px; /*largura da caixa*/
-  margin: 4px auto; /*margem de 4 emcima e embaixo e automatico dos lados para ficar no meio*/
+  position: relative;
+  width: 64px; 
+  margin: 4px auto; 
 }
 
-/* foto do botao de modo light/dark*/
+
 #switch button {
-  width: 32px; /* largura do botao*/
-  height: 32px; /* altura do botao*/
-  background: white var(--switch-svg-url) no-repeat center; /* fundo com cor branca, uma imagem, sem repetição e no centro*/
-  border: 0; /*sem borda*/
-  border-radius: 50%; /* arredondar a borda( 50% é um circulo perfeito*/
-  position: absolute; /* para fazer uma sobreposição de camadas e botar um emcima do outro*/
-  top: 50%; /* com a tag absolute como alinhar usando o topo e com o 50% se deixa no meio*/
-  left: 0; /* deixar todo para a esquerda com a tag absolute*/
-  z-index: 1; /* antes estava o track por cima e essa tag bota o botao por cima do track*/
-  transform: translateY(
-    -50%
-  ); /*quando estiver com a tag absolute, como alinhar o eixo Y*/
+  width: 32px; 
+  height: 32px; 
+  background: white var(--switch-svg-url) no-repeat center; 
+  border: 0; 
+  border-radius: 50%; 
+  position: absolute; 
+  top: 50%; 
+  left: 0; 
+  z-index: 1;
+  transform: translateY(-50%); 
+  animation: slide-back 0.2s;
 }
 
 /*track do botao*/
 #switch span {
-  display: block; /*span é inline enato tive que botar display block para botar largura e altura*/
-  width: 64px; /*largura*/
-  height: 24px; /*altura*/
-  background: var(--surface-color); /*cor do fundo do botao*/
-  border: 1px solid var(--stroke-color); /*borda do botao*/
-  backdrop-filter: blur(4px); /*deixar meio embaçado*/
-  border-radius: 9999px; /*arredondar a borda*/
+  display: block; 
+  width: 64px; 
+  height: 24px; 
+  background: var(--surface-color); 
+  border: 1px solid var(--stroke-color); 
+  backdrop-filter: blur(4px); 
+  border-radius: 9999px; 
 }
 
 .light #switch button {
-  right: 0; /* todo a direita com a tag absolute*/
-  left: initial; /* para fazer as tag right e left funcionar quando mudar para o light, o botao mudar tbm e ir para a direita*/
+   animation: slide-in 0.2s forwards;
+}
+#switch button:hover{
+  outline: 8px solid var(--highlight-color);
 }
 
 ul {
-  list-style: none; /* tirar os pontos da lista*/
-  display: flex; /* deixar os itens da lista flexivel para eu poder botar aonde quiser e tambem botar o gap(espaço) entre eles, como por ex: um do lado do outro ou um embaixo do outro */
-  flex-direction: column; /* deixar os itens um embaixo do outro*/
-  gap: 16px; /* espaço entre cada linha da lista */
-  padding: 24px 0; /* preenchimento da lista emcima e embaixo de 24 e 0 dos lados */
+  list-style: none; 
+  display: flex; 
+  flex-direction: column; 
+  gap: 16px; 
+  padding: 24px 0; 
 }
 
-ul li a {
-  display: block; /* usar essa tag para poder usar a tag de baixo e alinhar os itens */
-  text-align: center; /* centralizar os itens */
-  padding: 16px 24px; /* preencher a caixa dos itens da lista para deixar elas no meio, tanto na vertical quanto na horizontal */
-  background: var(--surface-color); /* mudar a cor do fundo do botao */
-  border: 1px solid var(--stroke-color); /* botar a cor da borda do botao */
-  border-radius: 8px; /* arredondar a borda */
-  backdrop-filter: blur(4px); /*deixar meio embaçado */
-  text-decoration: none; /* tirar ou colocar linha embaixo ou emcima da palavra */
-  font-weight: 500; /* tamanho da fonte */
-  transition: background 0.2s; /*transição de uma cor para outra quando passa o mouse emcima dos botoes*/
+ul li a { 
+  display: flex;
+  text-align: center; 
+  padding: 16px 24px;
+  background: var(--surface-color); 
+  border: 1px solid var(--stroke-color); 
+  border-radius: 8px; 
+  backdrop-filter: blur(4px); 
+  text-decoration: none; 
+  font-weight: 500; 
+  transition: background 0.2s; 
 }
 
-/* pseudo-selector ( quando passa o mouse por cima) */
+
 ul li a:hover {
-  background: var(
-    --surface-color-hover
-  ); /* mudar a cor do botao quando passa a mouse por cima */
-  border: 1.5px solid var(--text-color); /* borda do botao quando passa o mouse por cima */
+  background: var(--surface-color-hover); 
+  border: 1.5px solid var(--text-color); 
 }
 
 #social-links {
-  display: flex; /* tag para eu deixar os icones flexiveis e poder usar as 2 tag de baixo */
-  justify-content: center; /* alinhar os icones ao meio usando o display flex */
-  padding: 24px 0; /* preenchimento em cima e em baixo de 24 e 0 dos lados */
-  font-size: 24px; /* tamanho dos icones */
+  display: flex; 
+  justify-content: center; 
+  padding: 24px 0; 
+  font-size: 24px; 
 }
 
 #social-links a {
-  display: flex; /* deixar icones flexiveis*/
-  align-items: center; /* alinhar os icones quando passa o mouse por cima*/
-  padding: 16px; /*preenchimento*/
-  transition: background 0.2s; /*transição de uma cor para outra quando passa o mouse emcima dos botoes*/
-  border-radius: 50%; /* arredondar a borda (50% é uma circulo perfeito)*/
+  display: flex; 
+  align-items: center; 
+  padding: 16px; 
+  transition: background 0.2s; 
+  border-radius: 50%; 
 }
 
-/* hover é quando passa o mouse por cima */
+
 #social-links a:hover {
-  background: var(
-    --highlight-color
-  ); /*cor do fundo dos botoes quando passa o mouse por cima*/
+  background: var(--highlight-color); 
 }
 
 /* rodape da pagina*/
 footer {
-  padding: 24px 0; /*preenchimento*/
-  text-align: center; /* alinhar a frase*/
-  font-size: 14px; /* tamanho das letras*/
+  padding: 24px 0; 
+  text-align: center; 
+  font-size: 14px; 
+}
+
+@media (min-width: 700px) {
+  :root {
+    --bg-url: url(./assets/bg-desktop.jpg);
+  }
+
+  .light {
+    --bg-url: url(./assets/bg-desktop-light.jpg);
+  }
+}
+
+/*animation*/
+@keyframes slide-in {
+  from {
+    left:0;
+  }
+  to {
+    left: 50%;
+  }
+}
+
+@keyframes slide-back{
+  from {
+    left: 50%;
+  }
+  to{
+    left: 0;
+  }
 }
